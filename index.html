@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aagaman Adhikari — Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body class="text-gray-200 grid-bg relative overflow-x-hidden">
+
+  <!-- Glow orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- ── NAV ────────────────────────────────────────────── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-blue-900/40 backdrop-blur-md bg-navy/80">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
+      <span class="font-display font-800 text-lg tracking-tight text-white">AA<span class="text-azure-light">.</span></span>
+      <div class="hidden md:flex gap-7 text-sm font-medium text-gray-400">
+        <a href="#about"     class="nav-link hover:text-white transition-colors">About</a>
+        <a href="#experience" class="nav-link hover:text-white transition-colors">Experience</a>
+        <a href="#education" class="nav-link hover:text-white transition-colors">Education</a>
+        <a href="#skills"    class="nav-link hover:text-white transition-colors">Skills</a>
+        <a href="#contact"   class="nav-link hover:text-white transition-colors">Contact</a>
+      </div>
+      <a href="mailto:aagaman.adhikari2020@gmail.com"
+         class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-azure text-azure-light text-sm hover:bg-azure hover:text-white transition-all">
+        Hire Me
+      </a>
+      <!-- Mobile hamburger -->
+      <button id="menuBtn" class="md:hidden text-gray-400 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-blue-900/40 px-6 py-4 flex flex-col gap-4 text-sm text-gray-300">
+      <a href="#about"      class="hover:text-white">About</a>
+      <a href="#experience" class="hover:text-white">Experience</a>
+      <a href="#education"  class="hover:text-white">Education</a>
+      <a href="#skills"     class="hover:text-white">Skills</a>
+      <a href="#contact"    class="hover:text-white">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <section id="about" class="relative min-h-screen flex items-center pt-20 pb-16">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+
+      <!-- Text -->
+      <div class="reveal" id="hero-text">
+        <p class="text-azure-glow font-display text-sm tracking-[0.2em] uppercase mb-3">BCA Student &amp; Tech Enthusiast</p>
+        <h1 class="font-display font-800 text-5xl md:text-6xl leading-tight text-white mb-5">
+          Aagaman<br/><span class="text-azure-light">Adhikari</span>
+        </h1>
+        <p class="text-gray-400 text-base leading-relaxed max-w-lg mb-8">
+          A young professional pursuing a Bachelor of Computer Application, blending administrative
+          expertise, design skills, and a passion for technology to build a versatile career path.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#contact"
+             class="px-6 py-2.5 bg-azure text-white font-medium rounded-full hover:bg-azure-light transition-colors shadow-lg shadow-blue-900/40">
+            Get In Touch
+          </a>
+          <a href="#experience"
+             class="px-6 py-2.5 border border-blue-700 text-gray-300 font-medium rounded-full hover:border-azure-light hover:text-white transition-colors">
+            View Work
+          </a>
+        </div>
+        <!-- Quick stats -->
+        <div class="flex gap-8 mt-10">
+          <div>
+            <p class="font-display font-700 text-3xl text-white">3+</p>
+            <p class="text-xs text-gray-500 mt-0.5">Experiences</p>
+          </div>
+          <div class="border-l border-blue-900 pl-8">
+            <p class="font-display font-700 text-3xl text-white">2</p>
+            <p class="text-xs text-gray-500 mt-0.5">Trainings</p>
+          </div>
+          <div class="border-l border-blue-900 pl-8">
+            <p class="font-display font-700 text-3xl text-white">22</p>
+            <p class="text-xs text-gray-500 mt-0.5">Years Old</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photo -->
+      <div class="flex justify-center md:justify-end reveal" id="hero-photo">
+        <div class="relative w-64 h-64 md:w-80 md:h-80">
+          <!-- Spinning glow ring -->
+          <div class="avatar-ring absolute inset-0 rounded-full p-[3px]">
+            <div class="w-full h-full rounded-full bg-navy"></div>
+          </div>
+          <!-- Photo — replace src with your actual photo URL or base64 -->
+          <div class="absolute inset-[3px] rounded-full overflow-hidden photo-placeholder">
+            <img
+              id="cvPhoto"
+              src=""
+              alt="Aagaman Adhikari"
+              class="w-full h-full object-cover hidden"
+              onerror="this.classList.add('hidden')"
+            />
+            <!-- Fallback initials -->
+            <div id="initials" class="w-full h-full flex items-center justify-center">
+              <span class="font-display font-800 text-5xl text-white opacity-80">AA</span>
+            </div>
+          </div>
+          <!-- Upload badge -->
+          <label for="photoUpload"
+                 class="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-azure flex items-center justify-center cursor-pointer shadow-lg hover:bg-azure-light transition-colors"
+                 title="Upload your photo">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            <input type="file" id="photoUpload" accept="image/*" class="hidden"/>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- Decorative line -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-700/40 to-transparent"></div>
+  </section>
+
+  <!-- ── EXPERIENCE ─────────────────────────────────────── -->
+  <section id="experience" class="py-20 relative z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal mb-12">
+        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Career Path</p>
+        <h2 class="font-display font-700 text-4xl text-white">Work Experience</h2>
+        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
+      </div>
+
+      <div class="space-y-8">
+
+        <!-- Delta AutoCorp -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+          <div class="flex flex-col md:flex-row md:items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                <div>
+                  <h3 class="font-display font-600 text-lg text-white">Office Administration Officer (Intern)</h3>
+                  <p class="text-azure-light text-sm">Delta AutoCorp Pvt. Ltd · Kathmandu</p>
+                </div>
+                <span class="text-xs font-medium text-gray-400 bg-blue-900/40 border border-blue-800/50 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
+                  Sep 2023 – Nov 2023
+                </span>
+              </div>
+              <ul class="space-y-1.5 text-sm text-gray-400">
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Managed daily office operations including supplies and file organisation.</li>
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Gained proficiency in Microsoft Office Suite; collaborated across departments for administrative support.</li>
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Participated in process-improvement projects and received mentorship from senior professionals.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jalapeno Restaurant -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+          <div class="flex flex-col md:flex-row md:items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a4 4 0 00-8 0v2M5 9h14l1 12H4L5 9z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                <div>
+                  <h3 class="font-display font-600 text-lg text-white">Cashier</h3>
+                  <p class="text-azure-light text-sm">Jalapeno Restaurant and Bar · Sauraha, Chitwan</p>
+                </div>
+                <span class="text-xs font-medium text-gray-400 bg-blue-900/40 border border-blue-800/50 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
+                  Feb 2023 – Jun 2023
+                </span>
+              </div>
+              <ul class="space-y-1.5 text-sm text-gray-400">
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Handled cash, card, and digital payment processing with accuracy and security.</li>
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Provided efficient customer service; resolved complaints and ensured smooth checkout flow.</li>
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Balanced the register daily and prepared financial reports; coordinated with staff during peak hours.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Himalayan Bank -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+          <div class="flex flex-col md:flex-row md:items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M3 6h18M3 14h18M3 18h18"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                <div>
+                  <h3 class="font-display font-600 text-lg text-white">Banking Intern</h3>
+                  <p class="text-azure-light text-sm">Himalayan Bank Ltd. · Tandi, Chitwan</p>
+                </div>
+                <span class="text-xs font-medium text-gray-400 bg-blue-900/40 border border-blue-800/50 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
+                  Aug 2022 – Jan 2023
+                </span>
+              </div>
+              <ul class="space-y-1.5 text-sm text-gray-400">
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Assisted customers with account opening, enquiries, and e-banking/SMS banking form distribution.</li>
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Managed cheque book issuance and maintained accurate cheque records.</li>
+                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Digitised customer photos and signatures; filed account opening/closing documentation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION ──────────────────────────────────────── -->
+  <section id="education" class="py-20 relative z-10 border-t border-blue-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal mb-12">
+        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Academic Journey</p>
+        <h2 class="font-display font-700 text-4xl text-white">Education &amp; Training</h2>
+        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- BCA -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-azure/20 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422A12.083 12.083 0 0121 17.25c0 5.25-4.03 7.75-9 7.75s-9-2.5-9-7.75c0-1.123.2-2.2.84-3.672L12 14z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">2023 – Current</span>
+              <h3 class="font-display font-600 text-base text-white mt-1.5">Bachelor of Computer Application</h3>
+              <p class="text-azure-light text-sm">Ratna Rajya Laxmi Campus · Kathmandu</p>
+              <a href="https://rrlc.tu.edu.np" target="_blank" class="text-xs text-gray-500 hover:text-azure-light mt-1 inline-block transition-colors">rrlc.tu.edu.np ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- High School -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-azure/20 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <div>
+              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">2019 – 2021</span>
+              <h3 class="font-display font-600 text-base text-white mt-1.5">High School (+2)</h3>
+              <p class="text-azure-light text-sm">Skyrider HSBS · Tandi, Chitwan</p>
+              <p class="text-xs text-gray-500 mt-0.5">Management &amp; Computer Science</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware Training -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-green-900/30 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/>
+              </svg>
+            </div>
+            <div>
+              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">Mar 2024</span>
+              <h3 class="font-display font-600 text-base text-white mt-1.5">Hardware, Networking &amp; Troubleshooting</h3>
+              <p class="text-azure-light text-sm">Ratna Rajya Laxmi Campus</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accounting Training -->
+        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-yellow-900/30 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">Jun–Jul 2023</span>
+              <h3 class="font-display font-600 text-base text-white mt-1.5">Basic Accounting Training</h3>
+              <p class="text-azure-light text-sm">Baghmara Bufferzone Community Forest · Sauraha</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ─────────────────────────────────────────── -->
+  <section id="skills" class="py-20 relative z-10 border-t border-blue-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal mb-12">
+        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">What I Bring</p>
+        <h2 class="font-display font-700 text-4xl text-white">Skills &amp; Abilities</h2>
+        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10">
+
+        <!-- Tech Skills (bars) -->
+        <div class="reveal">
+          <h3 class="font-display font-600 text-sm uppercase tracking-widest text-gray-400 mb-6">Technical Skills</h3>
+          <div class="space-y-5" id="skillBars">
+            <!-- items injected by JS -->
+          </div>
+        </div>
+
+        <!-- Soft / other skills (tags) -->
+        <div class="reveal">
+          <h3 class="font-display font-600 text-sm uppercase tracking-widest text-gray-400 mb-6">Other Skills &amp; Info</h3>
+
+          <div class="mb-6">
+            <p class="text-xs text-gray-500 mb-2">Soft Skills</p>
+            <div class="flex flex-wrap gap-2" id="softTags"></div>
+          </div>
+
+          <div class="mb-6">
+            <p class="text-xs text-gray-500 mb-2">Language Proficiency</p>
+            <div class="space-y-2">
+              <div>
+                <div class="flex justify-between text-sm mb-1"><span>Nepali</span><span class="text-azure-light">Native</span></div>
+                <div class="h-1.5 rounded-full bg-blue-900/50"><div class="h-full rounded-full bg-azure bar-fill" data-w="100"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1"><span>English</span><span class="text-azure-light">B2 – C1</span></div>
+                <div class="h-1.5 rounded-full bg-blue-900/50"><div class="h-full rounded-full bg-azure-light bar-fill" data-w="75"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-xs text-gray-500 mb-2">Hobbies &amp; Interests</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🔧 Technophile</span>
+              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🎨 Drawing</span>
+              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🌿 Nature Lover</span>
+              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🏍️ Bike (Licence A)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ─────────────────────────────────────────── -->
+  <section id="contact" class="py-20 relative z-10 border-t border-blue-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal mb-12">
+        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Get In Touch</p>
+        <h2 class="font-display font-700 text-4xl text-white">Contact</h2>
+        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+
+        <!-- Contact cards -->
+        <div class="reveal space-y-4">
+          <a href="mailto:aagaman.adhikari2020@gmail.com"
+             class="flex items-center gap-4 card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5 backdrop-blur-sm group">
+            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">Email</p>
+              <p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">aagaman.adhikari2020@gmail.com</p>
+            </div>
+          </a>
+
+          <a href="tel:+9779840247855"
+             class="flex items-center gap-4 card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5 backdrop-blur-sm group">
+            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">Phone / WhatsApp</p>
+              <p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">+977 9840247855</p>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/aagaman-adhikari" target="_blank"
+             class="flex items-center gap-4 card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5 backdrop-blur-sm group">
+            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">LinkedIn</p>
+              <p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">linkedin.com/in/aagaman-adhikari</p>
+            </div>
+          </a>
+
+          <div class="flex items-center gap-4 bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5">
+            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500">Location</p>
+              <p class="text-sm text-gray-200">Saraswatinagar, Kathmandu (Permanent: Chitwan)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick message form (client-side only) -->
+        <div class="reveal bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
+          <h3 class="font-display font-600 text-base text-white mb-5">Send a Message</h3>
+          <div class="space-y-4">
+            <input type="text" placeholder="Your Name"
+              class="w-full bg-navy/60 border border-blue-900/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors"/>
+            <input type="email" placeholder="Your Email"
+              class="w-full bg-navy/60 border border-blue-900/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors"/>
+            <textarea rows="4" placeholder="Your Message"
+              class="w-full bg-navy/60 border border-blue-900/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors resize-none"></textarea>
+            <a href="mailto:aagaman.adhikari2020@gmail.com"
+               class="block w-full text-center px-6 py-2.5 bg-azure text-white font-medium rounded-full hover:bg-azure-light transition-colors shadow-lg shadow-blue-900/40">
+              Send via Email ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="border-t border-blue-900/30 py-6 relative z-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="font-display font-600 text-white text-sm">Aagaman Adhikari<span class="text-azure">.</span></p>
+      <p class="text-xs text-gray-600">© 2025 · Kathmandu, Nepal · All rights reserved</p>
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────── -->
+  <script>
+    /* Skill bars data */
+    const techSkills = [
+      { name: 'Microsoft Office Suite',       pct: 90 },
+      { name: 'HTML & CSS / Web Development', pct: 75 },
+      { name: 'Graphic Design (Photoshop / Illustrator)', pct: 70 },
+      { name: 'Computer Hardware & Networking', pct: 80 },
+      { name: 'Java (Basic Programming)',     pct: 55 },
+      { name: 'Typing & Data Entry',          pct: 85 },
+    ];
+    const softSkills = ['Customer Service','Teamwork','Problem-Solving','Attention to Detail','Communication','Adaptability','Time Management'];
+
+    const barsContainer = document.getElementById('skillBars');
+    techSkills.forEach(s => {
+      barsContainer.insertAdjacentHTML('beforeend', `
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-gray-300">${s.name}</span>
+            <span class="text-azure-light font-medium">${s.pct}%</span>
+          </div>
+          <div class="h-1.5 rounded-full bg-blue-900/50">
+            <div class="h-full rounded-full bg-gradient-to-r from-azure to-azure-light bar-fill" data-w="${s.pct}"></div>
+          </div>
+        </div>
+      `);
+    });
+
+    const softContainer = document.getElementById('softTags');
+    softSkills.forEach(s => {
+      softContainer.insertAdjacentHTML('beforeend',
+        `<span class="px-3 py-1 text-sm rounded-full bg-blue-900/40 border border-blue-800/60 text-gray-300">${s}</span>`);
+    });
+
+    /* Intersection Observer: reveal + bars */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          /* Animate bar fills if inside this section */
+          e.target.querySelectorAll('.bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.w + '%';
+          });
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* Also trigger bars that are already in reveal elements that get made visible */
+    document.querySelectorAll('.bar-fill').forEach(bar => {
+      const parent = bar.closest('.reveal');
+      if (!parent) bar.style.width = bar.dataset.w + '%';
+    });
+
+    /* Mobile menu */
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('#mobileMenu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+    );
+
+    /* Photo upload */
+    document.getElementById('photoUpload').addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = document.getElementById('cvPhoto');
+        img.src = ev.target.result;
+        img.classList.remove('hidden');
+        document.getElementById('initials').classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    /* Nav active highlight on scroll */
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 80) cur = sec.id;
+      });
+      document.querySelectorAll('.nav-link').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+      });
+    }, { passive: true });
+  </script>
+</body>
+</html>
