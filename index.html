@@ -3,648 +3,618 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aagaman Adhikari — Portfolio</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <title>Aagaman Adhikari — IT Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            navy:    { DEFAULT: '#0a0f1e', 800: '#0d1530', 700: '#111d45', 600: '#162255' },
-            azure:   { DEFAULT: '#2563eb', light: '#3b82f6', glow: '#60a5fa' },
-            ice:     { DEFAULT: '#e0f2fe', dim: '#bae6fd' },
+            navy:  { DEFAULT: '#080e1d', 800: '#0c1528', 700: '#111d3a', 600: '#162350' },
+            azure: { DEFAULT: '#2563eb', light: '#3b82f6', glow: '#60a5fa' },
           },
           fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            body:    ['DM Sans', 'sans-serif'],
-          },
+            display: ['Syne','sans-serif'],
+            body:    ['DM Sans','sans-serif'],
+          }
         }
       }
     }
   </script>
   <style>
-    * { box-sizing: border-box; }
-    body { background: #0a0f1e; font-family: 'DM Sans', sans-serif; scroll-behavior: smooth; }
+    *{box-sizing:border-box;}
+    body{font-family:'DM Sans',sans-serif;background:#080e1d;color:#e2e8f0;scroll-behavior:smooth;}
+    .grid-bg{background-image:linear-gradient(rgba(37,99,235,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.06) 1px,transparent 1px);background-size:48px 48px;}
+    .orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
+    .orb1{width:400px;height:400px;background:rgba(37,99,235,.14);top:-100px;left:-80px;}
+    .orb2{width:300px;height:300px;background:rgba(96,165,250,.1);bottom:60px;right:-60px;}
+    .card{background:rgba(12,21,40,.7);border:1px solid rgba(37,99,235,.2);border-radius:14px;backdrop-filter:blur(8px);transition:border-color .25s,transform .25s,box-shadow .25s;}
+    .card:hover{border-color:rgba(96,165,250,.4);transform:translateY(-3px);box-shadow:0 10px 32px rgba(37,99,235,.2);}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    .bar{height:6px;border-radius:99px;background:rgba(37,99,235,.18);overflow:hidden;}
+    .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#2563eb,#60a5fa);width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;border:1px solid rgba(37,99,235,.3);background:rgba(37,99,235,.1);color:#93c5fd;font-size:.78rem;}
+    .nav-link{position:relative;transition:color .2s;}
+    .nav-link::after{content:'';position:absolute;left:50%;bottom:-3px;width:0;height:2px;background:#3b82f6;transform:translateX(-50%);transition:width .25s;}
+    .nav-link:hover{color:#fff;}
+    .nav-link:hover::after,.nav-link.active::after{width:100%;}
+    .avatar-wrap{background:conic-gradient(#2563eb,#60a5fa,#2563eb);animation:spin 7s linear infinite;border-radius:50%;padding:3px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .section-tag{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#60a5fa;font-family:'Syne',sans-serif;}
+    ::-webkit-scrollbar{width:4px;}
+    ::-webkit-scrollbar-track{background:#080e1d;}
+    ::-webkit-scrollbar-thumb{background:#2563eb;border-radius:4px;}
 
-    /* Animated grid background */
-    .grid-bg {
-      background-image:
-        linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px);
-      background-size: 48px 48px;
+    /* ── PRINT / PDF STYLES ── */
+    @media print{
+      body{background:#fff!important;color:#111!important;}
+      .grid-bg{background:none!important;}
+      .orb,.orb1,.orb2{display:none!important;}
+      nav,.no-print{display:none!important;}
+      section{break-inside:avoid;padding:12px 0!important;}
+      .card{background:#f8faff!important;border:1px solid #dbeafe!important;box-shadow:none!important;transform:none!important;}
+      .card:hover{transform:none!important;}
+      h1,h2,h3{color:#111!important;}
+      .text-azure-light,.text-azure-glow,.text-azure{color:#1d4ed8!important;}
+      .text-gray-400,.text-gray-300,.text-gray-200,.text-gray-500{color:#374151!important;}
+      .text-white{color:#111!important;}
+      .bar{background:#e0e7ff!important;}
+      .bar-fill{background:#2563eb!important;}
+      .pill{border-color:#bfdbfe!important;background:#eff6ff!important;color:#1d4ed8!important;}
+      .print-cv{display:none!important;}
+      #cv-print-layout{display:block!important;}
+      #main-site{display:none!important;}
+      @page{size:A4;margin:14mm 12mm;}
     }
 
-    /* Glow orbs */
-    .orb {
-      position: fixed; border-radius: 50%; filter: blur(90px);
-      pointer-events: none; z-index: 0;
-    }
-    .orb-1 { width: 420px; height: 420px; background: rgba(37,99,235,0.18); top: -80px; left: -80px; }
-    .orb-2 { width: 320px; height: 320px; background: rgba(96,165,250,0.12); bottom: 80px; right: -60px; }
-
-    /* Section fade-in */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* Card hover lift */
-    .card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(37,99,235,0.25); }
-
-    /* Timeline left border pulse */
-    .timeline-dot { box-shadow: 0 0 0 4px rgba(37,99,235,0.2); }
-
-    /* Skill bar fill animation */
-    .bar-fill { width: 0; transition: width 1.1s cubic-bezier(.22,1,.36,1); }
-
-    /* Avatar glow ring */
-    .avatar-ring {
-      background: conic-gradient(#2563eb, #60a5fa, #2563eb);
-      animation: spin 6s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Nav active dot */
-    .nav-link { position: relative; }
-    .nav-link::after {
-      content: ''; position: absolute; left: 50%; bottom: -4px;
-      width: 0; height: 2px; background: #3b82f6;
-      transform: translateX(-50%);
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #0a0f1e; }
-    ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 4px; }
-
-    /* Print / mobile friendly photo fallback */
-    .photo-placeholder {
-      background: linear-gradient(135deg, #162255, #2563eb);
-      display: flex; align-items: center; justify-content: center;
-    }
+    /* CV print layout (hidden on screen) */
+    #cv-print-layout{display:none;}
+    .cv-section-title{font-size:11pt;font-weight:700;color:#1d4ed8;border-bottom:2px solid #2563eb;padding-bottom:3px;margin-bottom:8px;letter-spacing:.04em;}
+    .cv-body{font-size:9.5pt;color:#222;line-height:1.5;}
   </style>
 </head>
-<body class="text-gray-200 grid-bg relative overflow-x-hidden">
+<body class="grid-bg overflow-x-hidden">
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
-  <!-- Glow orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-
-  <!-- ── NAV ────────────────────────────────────────────── -->
-  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-blue-900/40 backdrop-blur-md bg-navy/80">
-    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
-      <span class="font-display font-800 text-lg tracking-tight text-white">AA<span class="text-azure-light">.</span></span>
-      <div class="hidden md:flex gap-7 text-sm font-medium text-gray-400">
-        <a href="#about"     class="nav-link hover:text-white transition-colors">About</a>
-        <a href="#experience" class="nav-link hover:text-white transition-colors">Experience</a>
-        <a href="#education" class="nav-link hover:text-white transition-colors">Education</a>
-        <a href="#skills"    class="nav-link hover:text-white transition-colors">Skills</a>
-        <a href="#contact"   class="nav-link hover:text-white transition-colors">Contact</a>
-      </div>
-      <a href="mailto:aagaman.adhikari2020@gmail.com"
-         class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-azure text-azure-light text-sm hover:bg-azure hover:text-white transition-all">
-        Hire Me
-      </a>
-      <!-- Mobile hamburger -->
+<!-- ══ NAV ══ -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-blue-900/40 backdrop-blur-md bg-navy/80 no-print">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
+    <span class="font-display font-bold text-lg text-white">AA<span class="text-azure-light">.</span></span>
+    <div class="hidden md:flex gap-7 text-sm font-medium text-gray-400">
+      <a href="#about"      class="nav-link">About</a>
+      <a href="#skills"     class="nav-link">Skills</a>
+      <a href="#projects"   class="nav-link">Projects</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#education"  class="nav-link">Education</a>
+      <a href="#contact"    class="nav-link">Contact</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="printCV()" class="print-cv hidden md:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-azure text-white text-sm font-medium hover:bg-azure-light transition-colors shadow-lg shadow-blue-900/40">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download CV
+      </button>
       <button id="menuBtn" class="md:hidden text-gray-400 hover:text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-blue-900/40 px-6 py-4 flex flex-col gap-4 text-sm text-gray-300">
-      <a href="#about"      class="hover:text-white">About</a>
-      <a href="#experience" class="hover:text-white">Experience</a>
-      <a href="#education"  class="hover:text-white">Education</a>
-      <a href="#skills"     class="hover:text-white">Skills</a>
-      <a href="#contact"    class="hover:text-white">Contact</a>
-    </div>
-  </nav>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-blue-900/40 px-6 py-4 flex flex-col gap-3 text-sm text-gray-300">
+    <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a>
+    <a href="#experience">Experience</a><a href="#education">Education</a><a href="#contact">Contact</a>
+    <button onclick="printCV()" class="flex items-center gap-2 text-azure-light font-medium">⬇ Download CV</button>
+  </div>
+</nav>
 
-  <!-- ── HERO ───────────────────────────────────────────── -->
-  <section id="about" class="relative min-h-screen flex items-center pt-20 pb-16">
-    <div class="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+<!-- ══ MAIN SITE ══ -->
+<div id="main-site">
 
-      <!-- Text -->
-      <div class="reveal" id="hero-text">
-        <p class="text-azure-glow font-display text-sm tracking-[0.2em] uppercase mb-3">BCA Student &amp; Tech Enthusiast</p>
-        <h1 class="font-display font-800 text-5xl md:text-6xl leading-tight text-white mb-5">
-          Aagaman<br/><span class="text-azure-light">Adhikari</span>
-        </h1>
-        <p class="text-gray-400 text-base leading-relaxed max-w-lg mb-8">
-          A young professional pursuing a Bachelor of Computer Application, blending administrative
-          expertise, design skills, and a passion for technology to build a versatile career path.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="#contact"
-             class="px-6 py-2.5 bg-azure text-white font-medium rounded-full hover:bg-azure-light transition-colors shadow-lg shadow-blue-900/40">
-            Get In Touch
-          </a>
-          <a href="#experience"
-             class="px-6 py-2.5 border border-blue-700 text-gray-300 font-medium rounded-full hover:border-azure-light hover:text-white transition-colors">
-            View Work
-          </a>
-        </div>
-        <!-- Quick stats -->
-        <div class="flex gap-8 mt-10">
-          <div>
-            <p class="font-display font-700 text-3xl text-white">3+</p>
-            <p class="text-xs text-gray-500 mt-0.5">Experiences</p>
-          </div>
-          <div class="border-l border-blue-900 pl-8">
-            <p class="font-display font-700 text-3xl text-white">2</p>
-            <p class="text-xs text-gray-500 mt-0.5">Trainings</p>
-          </div>
-          <div class="border-l border-blue-900 pl-8">
-            <p class="font-display font-700 text-3xl text-white">22</p>
-            <p class="text-xs text-gray-500 mt-0.5">Years Old</p>
-          </div>
-        </div>
+<!-- ── HERO ── -->
+<section id="about" class="relative min-h-screen flex items-center pt-20 pb-16 z-10">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+    <div class="reveal">
+      <p class="section-tag mb-3">BCA Student · IT Enthusiast</p>
+      <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-tight text-white mb-4">
+        Aagaman<br/><span class="text-azure-light">Adhikari</span>
+      </h1>
+      <p class="text-gray-400 text-sm leading-relaxed max-w-md mb-7">
+        Pursuing Bachelor of Computer Application at Ratna Rajya Laxmi Campus, Kathmandu. Passionate about web development, UI/UX design, and computer networking. I build clean interfaces and solve technical problems.
+      </p>
+      <div class="flex flex-wrap gap-3 mb-8">
+        <a href="#contact" class="px-5 py-2.5 bg-azure text-white text-sm font-medium rounded-full hover:bg-azure-light transition-colors shadow-lg shadow-blue-900/40">Get In Touch</a>
+        <a href="#projects" class="px-5 py-2.5 border border-blue-700 text-gray-300 text-sm font-medium rounded-full hover:border-azure-light hover:text-white transition-colors">View Projects</a>
+        <button onclick="printCV()" class="print-cv px-5 py-2.5 border border-azure/50 text-azure-light text-sm font-medium rounded-full hover:bg-azure/10 transition-colors flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Download CV
+        </button>
       </div>
-
-      <!-- Photo -->
-      <div class="flex justify-center md:justify-end reveal" id="hero-photo">
-        <div class="relative w-64 h-64 md:w-80 md:h-80">
-          <!-- Spinning glow ring -->
-          <div class="avatar-ring absolute inset-0 rounded-full p-[3px]">
-            <div class="w-full h-full rounded-full bg-navy"></div>
-          </div>
-          <!-- Photo — replace src with your actual photo URL or base64 -->
-          <div class="absolute inset-[3px] rounded-full overflow-hidden photo-placeholder">
-            <img
-              id="cvPhoto"
-              src=""
-              alt="Aagaman Adhikari"
-              class="w-full h-full object-cover hidden"
-              onerror="this.classList.add('hidden')"
-            />
-            <!-- Fallback initials -->
-            <div id="initials" class="w-full h-full flex items-center justify-center">
-              <span class="font-display font-800 text-5xl text-white opacity-80"><img src="profile.jpeg" alt="AA"/></span>
-            </div>
-          </div>
-          <!-- Upload badge -->
-          <!-- <label for="photoUpload"
-                 class="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-azure flex items-center justify-center cursor-pointer shadow-lg hover:bg-azure-light transition-colors"
-                 title="Upload your photo">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-            <input type="file" id="photoUpload" accept="image/*" class="hidden"/>
-          </label> -->
+      <div class="flex gap-7">
+        <div><p class="font-display font-bold text-2xl text-white">BCA</p><p class="text-xs text-gray-500 mt-0.5">Ongoing</p></div>
+        <div class="border-l border-blue-900/60 pl-7"><p class="font-display font-bold text-2xl text-white">3+</p><p class="text-xs text-gray-500 mt-0.5">Internships</p></div>
+        <div class="border-l border-blue-900/60 pl-7"><p class="font-display font-bold text-2xl text-white">5+</p><p class="text-xs text-gray-500 mt-0.5">Tech Skills</p></div>
+      </div>
+    </div>
+    <!-- Photo -->
+    <div class="flex justify-center md:justify-end reveal">
+      <div class="relative w-56 h-56 md:w-72 md:h-72">
+        <div class="avatar-wrap absolute inset-0 rounded-full">
+          <div class="w-full h-full rounded-full bg-navy-800"></div>
+        </div>
+        <div class="absolute inset-[3px] rounded-full overflow-hidden bg-gradient-to-br from-navy-700 to-navy-800 flex items-center justify-center">
+          <!-- Replace the initials div below with: <img src="your-photo.jpg" class="w-full h-full object-cover" alt="Aagaman"/> -->
+          <span class="font-display font-bold text-5xl text-azure-light select-none">AA</span>
         </div>
       </div>
     </div>
-    <!-- Decorative line -->
-    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-700/40 to-transparent"></div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── EXPERIENCE ─────────────────────────────────────── -->
-  <section id="experience" class="py-20 relative z-10">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal mb-12">
-        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Career Path</p>
-        <h2 class="font-display font-700 text-4xl text-white">Work Experience</h2>
-        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
+<!-- ── SKILLS ── -->
+<section id="skills" class="py-20 relative z-10 border-t border-blue-900/30">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal mb-10">
+      <p class="section-tag mb-2">What I Know</p>
+      <h2 class="font-display font-bold text-3xl text-white">Technical Skills</h2>
+      <div class="w-10 h-1 bg-azure rounded mt-3"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10">
+      <!-- Skill bars -->
+      <div class="reveal">
+        <h3 class="text-xs uppercase tracking-widest text-gray-500 font-display mb-5">Proficiency</h3>
+        <div class="space-y-4" id="skillBars"></div>
       </div>
 
-      <div class="space-y-8">
+      <!-- Tech stack tags -->
+      <div class="reveal">
+        <h3 class="text-xs uppercase tracking-widest text-gray-500 font-display mb-5">Tools & Technologies</h3>
+        <div class="flex flex-wrap gap-2 mb-7" id="techTags"></div>
 
-        <!-- Delta AutoCorp -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-          <div class="flex flex-col md:flex-row md:items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16"/>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                <div>
-                  <h3 class="font-display font-600 text-lg text-white">Office Administration Officer (Intern)</h3>
-                  <p class="text-azure-light text-sm">Delta AutoCorp Pvt. Ltd · Kathmandu</p>
-                </div>
-                <span class="text-xs font-medium text-gray-400 bg-blue-900/40 border border-blue-800/50 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
-                  Sep 2023 – Nov 2023
-                </span>
-              </div>
-              <ul class="space-y-1.5 text-sm text-gray-400">
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Managed daily office operations including supplies and file organisation.</li>
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Gained proficiency in Microsoft Office Suite; collaborated across departments for administrative support.</li>
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Participated in process-improvement projects and received mentorship from senior professionals.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Jalapeno Restaurant -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-          <div class="flex flex-col md:flex-row md:items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a4 4 0 00-8 0v2M5 9h14l1 12H4L5 9z"/>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                <div>
-                  <h3 class="font-display font-600 text-lg text-white">Cashier</h3>
-                  <p class="text-azure-light text-sm">Jalapeno Restaurant and Bar · Sauraha, Chitwan</p>
-                </div>
-                <span class="text-xs font-medium text-gray-400 bg-blue-900/40 border border-blue-800/50 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
-                  Feb 2023 – Jun 2023
-                </span>
-              </div>
-              <ul class="space-y-1.5 text-sm text-gray-400">
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Handled cash, card, and digital payment processing with accuracy and security.</li>
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Provided efficient customer service; resolved complaints and ensured smooth checkout flow.</li>
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Balanced the register daily and prepared financial reports; coordinated with staff during peak hours.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Himalayan Bank -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
-          <div class="flex flex-col md:flex-row md:items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/40 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M3 6h18M3 14h18M3 18h18"/>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-                <div>
-                  <h3 class="font-display font-600 text-lg text-white">Banking Intern</h3>
-                  <p class="text-azure-light text-sm">Himalayan Bank Ltd. · Tandi, Chitwan</p>
-                </div>
-                <span class="text-xs font-medium text-gray-400 bg-blue-900/40 border border-blue-800/50 px-3 py-1 rounded-full self-start sm:self-auto whitespace-nowrap">
-                  Aug 2022 – Jan 2023
-                </span>
-              </div>
-              <ul class="space-y-1.5 text-sm text-gray-400">
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Assisted customers with account opening, enquiries, and e-banking/SMS banking form distribution.</li>
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Managed cheque book issuance and maintained accurate cheque records.</li>
-                <li class="flex gap-2"><span class="text-azure mt-0.5">▸</span> Digitised customer photos and signatures; filed account opening/closing documentation.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+        <h3 class="text-xs uppercase tracking-widest text-gray-500 font-display mb-5">Soft Skills</h3>
+        <div class="flex flex-wrap gap-2" id="softTags"></div>
       </div>
     </div>
-  </section>
 
-  <!-- ── EDUCATION ──────────────────────────────────────── -->
-  <section id="education" class="py-20 relative z-10 border-t border-blue-900/30">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal mb-12">
-        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Academic Journey</p>
-        <h2 class="font-display font-700 text-4xl text-white">Education</h2>
-        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- BCA -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
-          <div class="flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-azure/20 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422A12.083 12.083 0 0121 17.25c0 5.25-4.03 7.75-9 7.75s-9-2.5-9-7.75c0-1.123.2-2.2.84-3.672L12 14z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">2023 – Current</span>
-              <h3 class="font-display font-600 text-base text-white mt-1.5">Bachelor of Computer Application</h3>
-              <p class="text-azure-light text-sm">Ratna Rajya Laxmi Campus · Kathmandu</p>
-              <a href="https://rrlc.tu.edu.np" target="_blank" class="text-xs text-gray-500 hover:text-azure-light mt-1 inline-block transition-colors">rrlc.tu.edu.np ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- High School -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
-          <div class="flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-azure/20 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-              </svg>
-            </div>
-            <div>
-              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">2019 – 2021</span>
-              <h3 class="font-display font-600 text-base text-white mt-1.5">High School (+2)</h3>
-              <p class="text-azure-light text-sm">Skyrider HSBS · Tandi, Chitwan</p>
-              <p class="text-xs text-gray-500 mt-0.5">Management &amp; Computer Science</p>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Traning ──────────────────────────────────────── -->
-  <section id="education" class="py-20 relative z-10 border-t border-blue-900/30">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal mb-12">
-        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Tranings</p>
-        <h2 class="font-display font-700 text-4xl text-white">Training</h2>
-        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- Hardware Training -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
-          <div class="flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-green-900/30 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/>
-              </svg>
-            </div>
-            <div>
-              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">Mar 2024</span>
-              <h3 class="font-display font-600 text-base text-white mt-1.5">Hardware, Networking &amp; Troubleshooting</h3>
-              <p class="text-azure-light text-sm">Ratna Rajya Laxmi Campus</p>
-            </div>
-          </div>
-        </div>
-        <!-- Accounting Training -->
-        <div class="reveal card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
-          <div class="flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-yellow-900/30 flex items-center justify-center flex-shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">Jun–Jul 2023</span>
-              <h3 class="font-display font-600 text-base text-white mt-1.5">Basic Accounting Training</h3>
-              <p class="text-azure-light text-sm">Baghmara Bufferzone Community Forest · Sauraha</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── SKILLS ─────────────────────────────────────────── -->
-  <section id="skills" class="py-20 relative z-10 border-t border-blue-900/30">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal mb-12">
-        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">What I Bring</p>
-        <h2 class="font-display font-700 text-4xl text-white">Skills &amp; Abilities</h2>
-        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-10">
-
-        <!-- Tech Skills (bars) -->
-        <div class="reveal">
-          <h3 class="font-display font-600 text-sm uppercase tracking-widest text-gray-400 mb-6">Technical Skills</h3>
-          <div class="space-y-5" id="skillBars">
-            <!-- items injected by JS -->
-          </div>
-        </div>
-
-        <!-- Soft / other skills (tags) -->
-        <div class="reveal">
-          <h3 class="font-display font-600 text-sm uppercase tracking-widest text-gray-400 mb-6">Other Skills &amp; Info</h3>
-
-          <div class="mb-6">
-            <p class="text-xs text-gray-500 mb-2">Soft Skills</p>
-            <div class="flex flex-wrap gap-2" id="softTags"></div>
-          </div>
-
-          <div class="mb-6">
-            <p class="text-xs text-gray-500 mb-2">Language Proficiency</p>
-            <div class="space-y-2">
-              <div>
-                <div class="flex justify-between text-sm mb-1"><span>Nepali</span><span class="text-azure-light">Native</span></div>
-                <div class="h-1.5 rounded-full bg-blue-900/50"><div class="h-full rounded-full bg-azure bar-fill" data-w="100"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between text-sm mb-1"><span>English</span><span class="text-azure-light">B2 – C1</span></div>
-                <div class="h-1.5 rounded-full bg-blue-900/50"><div class="h-full rounded-full bg-azure-light bar-fill" data-w="75"></div></div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <p class="text-xs text-gray-500 mb-2">Hobbies &amp; Interests</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🔧 Technophile</span>
-              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🎨 Drawing</span>
-              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🌿 Nature Lover</span>
-              
-            </div>
-          </div>
-
-          <div>
-            <p class="text-xs text-gray-500 mb-2">Licenses</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 text-sm rounded-full border border-blue-800 text-gray-300">🏍️ Bike (Licence A)</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CONTACT ─────────────────────────────────────────── -->
-  <section id="contact" class="py-20 relative z-10 border-t border-blue-900/30">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal mb-12">
-        <p class="text-azure-glow text-sm tracking-[0.18em] uppercase font-display mb-2">Get In Touch</p>
-        <h2 class="font-display font-700 text-4xl text-white">Contact</h2>
-        <div class="w-12 h-1 bg-azure rounded mt-3"></div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 items-start">
-
-        <!-- Contact cards -->
-        <div class="reveal space-y-4">
-          <a href="mailto:aagaman.adhikari2020@gmail.com"
-             class="flex items-center gap-4 card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5 backdrop-blur-sm group">
-            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs text-gray-500">Email</p>
-              <p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">aagaman.adhikari2020@gmail.com</p>
-            </div>
-          </a>
-
-          <a href="tel:+9779840247855"
-             class="flex items-center gap-4 card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5 backdrop-blur-sm group">
-            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs text-gray-500">Phone / WhatsApp</p>
-              <p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">+977 9840247855</p>
-            </div>
-          </a>
-
-          <a href="https://www.linkedin.com/in/aagaman-adhikari" target="_blank"
-             class="flex items-center gap-4 card bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5 backdrop-blur-sm group">
-            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs text-gray-500">LinkedIn</p>
-              <p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">linkedin.com/in/aagaman-adhikari</p>
-            </div>
-          </a>
-
-          <div class="flex items-center gap-4 bg-navy-800/60 border border-blue-900/50 rounded-2xl p-5">
-            <div class="w-10 h-10 rounded-xl bg-azure/20 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-azure-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs text-gray-500">Location</p>
-              <p class="text-sm text-gray-200">Saraswatinagar, Kathmandu (Permanent: Chitwan)</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick message form (client-side only) -->
-        <div class="reveal bg-navy-800/60 border border-blue-900/50 rounded-2xl p-6 backdrop-blur-sm">
-          <h3 class="font-display font-600 text-base text-white mb-5">Send a Message</h3>
-          <div class="space-y-4">
-            <input type="text" placeholder="Your Name"
-              class="w-full bg-navy/60 border border-blue-900/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors"/>
-            <input type="email" placeholder="Your Email"
-              class="w-full bg-navy/60 border border-blue-900/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors"/>
-            <textarea rows="4" placeholder="Your Message"
-              class="w-full bg-navy/60 border border-blue-900/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors resize-none"></textarea>
-            <a href="mailto:aagaman.adhikari2020@gmail.com"
-               class="block w-full text-center px-6 py-2.5 bg-azure text-white font-medium rounded-full hover:bg-azure-light transition-colors shadow-lg shadow-blue-900/40">
-              Send via Email ↗
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ─────────────────────────────────────────── -->
-  <footer class="border-t border-blue-900/30 py-6 relative z-10">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="font-display font-600 text-white text-sm">Aagaman Adhikari<span class="text-azure">.</span></p>
-      <p class="text-xs text-gray-600">© 2025 · Kathmandu, Nepal · All rights reserved</p>
-    </div>
-  </footer>
-
-  <!-- ── SCRIPTS ────────────────────────────────────────── -->
-  <script>
-    /* Skill bars data */
-    const techSkills = [
-      { name: 'Microsoft Office Suite',       pct: 90 },
-      { name: 'HTML & CSS / Web Development', pct: 75 },
-      { name: 'Graphic Design (Photoshop / Illustrator/Canva)', pct: 70 },
-      { name: 'UI/UX Design', pct: 75 },
-      { name: 'Laravel(in PHP)', pct: 70 },
-      { name: 'Computer Hardware & Networking', pct: 80 },
-      { name: 'Java (Basic Programming)',     pct: 55 },
-      { name: 'Typing & Data Entry',          pct: 85 },
-    ];
-    const softSkills = ['Customer Service','Teamwork','Problem-Solving','Attention to Detail','Communication','Adaptability','Time Management'];
-
-    const barsContainer = document.getElementById('skillBars');
-    techSkills.forEach(s => {
-      barsContainer.insertAdjacentHTML('beforeend', `
+    <!-- Language -->
+    <div class="reveal mt-10">
+      <h3 class="text-xs uppercase tracking-widest text-gray-500 font-display mb-5">Language Skills</h3>
+      <div class="grid sm:grid-cols-2 gap-4 max-w-lg">
         <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-gray-300">${s.name}</span>
-            <span class="text-azure-light font-medium">${s.pct}%</span>
-          </div>
-          <div class="h-1.5 rounded-full bg-blue-900/50">
-            <div class="h-full rounded-full bg-gradient-to-r from-azure to-azure-light bar-fill" data-w="${s.pct}"></div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">Nepali</span><span class="text-azure-light">Native</span></div>
+          <div class="bar"><div class="bar-fill" data-w="100"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">English</span><span class="text-azure-light">B2 / Independent</span></div>
+          <div class="bar"><div class="bar-fill" data-w="72"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects" class="py-20 relative z-10 border-t border-blue-900/30">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal mb-10">
+      <p class="section-tag mb-2">What I've Built</p>
+      <h2 class="font-display font-bold text-3xl text-white">Projects</h2>
+      <div class="w-10 h-1 bg-azure rounded mt-3"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="reveal card p-5">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-azure/20 flex items-center justify-center text-lg">🌐</div>
+          <h3 class="font-display font-semibold text-white text-sm">Portfolio Website</h3>
+        </div>
+        <p class="text-gray-400 text-xs leading-relaxed mb-3">Personal CV & portfolio site built with HTML, CSS & Tailwind CSS. Fully responsive with blue/black theme.</p>
+        <div class="flex gap-1.5 flex-wrap"><span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">Tailwind</span></div>
+      </div>
+      <div class="reveal card p-5">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-azure/20 flex items-center justify-center text-lg">🖥️</div>
+          <h3 class="font-display font-semibold text-white text-sm">Hardware Troubleshooting Lab</h3>
+        </div>
+        <p class="text-gray-400 text-xs leading-relaxed mb-3">Hands-on training project covering PC assembly, OS installation, LAN/WAN setup and network diagnostics.</p>
+        <div class="flex gap-1.5 flex-wrap"><span class="pill">Networking</span><span class="pill">Hardware</span></div>
+      </div>
+      <div class="reveal card p-5">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-azure/20 flex items-center justify-center text-lg">🎨</div>
+          <h3 class="font-display font-semibold text-white text-sm">UI/UX Design Work</h3>
+        </div>
+        <p class="text-gray-400 text-xs leading-relaxed mb-3">Graphic design and layout projects using Adobe Photoshop, Illustrator, and Canva for visual communication.</p>
+        <div class="flex gap-1.5 flex-wrap"><span class="pill">Photoshop</span><span class="pill">Illustrator</span><span class="pill">Canva</span></div>
+      </div>
+    </div>
+    <p class="text-center text-xs text-gray-600 mt-6 reveal">More projects will be added as I progress through my BCA program.</p>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience" class="py-20 relative z-10 border-t border-blue-900/30">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal mb-10">
+      <p class="section-tag mb-2">Career</p>
+      <h2 class="font-display font-bold text-3xl text-white">Work Experience</h2>
+      <div class="w-10 h-1 bg-azure rounded mt-3"></div>
+    </div>
+    <div class="space-y-5">
+
+      <!-- Delta AutoCorp (most IT-relevant) -->
+      <div class="reveal card p-6">
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-azure/15 flex items-center justify-center flex-shrink-0 text-lg">🏢</div>
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:justify-between gap-1 mb-2">
+              <div>
+                <h3 class="font-display font-semibold text-white text-base">Office Administration Intern</h3>
+                <p class="text-azure-light text-xs">Delta AutoCorp Pvt. Ltd · Kathmandu</p>
+              </div>
+              <span class="text-xs text-gray-500 bg-blue-900/30 border border-blue-900/50 px-3 py-1 rounded-full self-start whitespace-nowrap">Sep–Nov 2023</span>
+            </div>
+            <ul class="space-y-1 text-xs text-gray-400">
+              <li class="flex gap-2"><span class="text-azure">▸</span>Managed digital records, spreadsheets, and document management systems</li>
+              <li class="flex gap-2"><span class="text-azure">▸</span>Used Microsoft Office Suite daily for data entry, reports, and communication</li>
+              <li class="flex gap-2"><span class="text-azure">▸</span>Supported IT-adjacent administrative tasks and process improvement initiatives</li>
+            </ul>
           </div>
         </div>
-      `);
+      </div>
+
+      <!-- Himalayan Bank (tech-adjacent) -->
+      <div class="reveal card p-6">
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-azure/15 flex items-center justify-center flex-shrink-0 text-lg">🏦</div>
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:justify-between gap-1 mb-2">
+              <div>
+                <h3 class="font-display font-semibold text-white text-base">Banking Intern</h3>
+                <p class="text-azure-light text-xs">Himalayan Bank Ltd. · Tandi, Chitwan</p>
+              </div>
+              <span class="text-xs text-gray-500 bg-blue-900/30 border border-blue-900/50 px-3 py-1 rounded-full self-start whitespace-nowrap">Aug 2022–Jan 2023</span>
+            </div>
+            <ul class="space-y-1 text-xs text-gray-400">
+              <li class="flex gap-2"><span class="text-azure">▸</span>Handled digital onboarding: scanned and uploaded customer photos/signatures to core banking system</li>
+              <li class="flex gap-2"><span class="text-azure">▸</span>Enrolled customers in e-banking and SMS banking platforms</li>
+              <li class="flex gap-2"><span class="text-azure">▸</span>Maintained accurate digital records and database entries</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION & TRAINING ── -->
+<section id="education" class="py-20 relative z-10 border-t border-blue-900/30">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal mb-10">
+      <p class="section-tag mb-2">Academic</p>
+      <h2 class="font-display font-bold text-3xl text-white">Education & Training</h2>
+      <div class="w-10 h-1 bg-azure rounded mt-3"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="reveal card p-5 flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-xl bg-azure/15 flex items-center justify-center text-xl flex-shrink-0">🎓</div>
+        <div>
+          <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">2023 – Present</span>
+          <h3 class="font-display font-semibold text-white text-sm mt-1.5">Bachelor of Computer Application</h3>
+          <p class="text-azure-light text-xs">Ratna Rajya Laxmi Campus · Kathmandu</p>
+          <p class="text-gray-500 text-xs mt-1">Tribhuvan University</p>
+        </div>
+      </div>
+      <div class="reveal card p-5 flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-xl bg-azure/15 flex items-center justify-center text-xl flex-shrink-0">📗</div>
+        <div>
+          <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">2019 – 2021</span>
+          <h3 class="font-display font-semibold text-white text-sm mt-1.5">High School (+2)</h3>
+          <p class="text-azure-light text-xs">Skyrider HSBS · Tandi, Chitwan</p>
+          <p class="text-gray-500 text-xs mt-1">Management & Computer Science</p>
+        </div>
+      </div>
+      <div class="reveal card p-5 flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-xl bg-green-900/30 flex items-center justify-center text-xl flex-shrink-0">🖥️</div>
+        <div>
+          <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">Mar 2024</span>
+          <h3 class="font-display font-semibold text-white text-sm mt-1.5">Hardware, Networking & Troubleshooting</h3>
+          <p class="text-azure-light text-xs">Ratna Rajya Laxmi Campus · Kathmandu</p>
+        </div>
+      </div>
+      <div class="reveal card p-5 flex gap-4 items-start">
+        <div class="w-10 h-10 rounded-xl bg-purple-900/30 flex items-center justify-center text-xl flex-shrink-0">🎨</div>
+        <div>
+          <span class="text-xs text-gray-500 bg-blue-900/30 px-2 py-0.5 rounded-full">Ongoing</span>
+          <h3 class="font-display font-semibold text-white text-sm mt-1.5">UI/UX & Graphic Design</h3>
+          <p class="text-azure-light text-xs">Self-directed · Adobe Suite, Figma</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="py-20 relative z-10 border-t border-blue-900/30">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal mb-10">
+      <p class="section-tag mb-2">Let's Connect</p>
+      <h2 class="font-display font-bold text-3xl text-white">Contact</h2>
+      <div class="w-10 h-1 bg-azure rounded mt-3"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <div class="reveal space-y-3">
+        <a href="mailto:aagaman.adhikari2020@gmail.com" class="card flex items-center gap-4 p-4 group">
+          <div class="w-9 h-9 rounded-xl bg-azure/15 flex items-center justify-center text-base">✉️</div>
+          <div><p class="text-xs text-gray-500">Email</p><p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">aagaman.adhikari2020@gmail.com</p></div>
+        </a>
+        <a href="https://www.linkedin.com/in/aagaman-adhikari" target="_blank" class="card flex items-center gap-4 p-4 group">
+          <div class="w-9 h-9 rounded-xl bg-azure/15 flex items-center justify-center text-base">🔗</div>
+          <div><p class="text-xs text-gray-500">LinkedIn</p><p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">linkedin.com/in/aagaman-adhikari</p></div>
+        </a>
+        <a href="tel:+9779840247855" class="card flex items-center gap-4 p-4 group">
+          <div class="w-9 h-9 rounded-xl bg-azure/15 flex items-center justify-center text-base">📱</div>
+          <div><p class="text-xs text-gray-500">Phone / WhatsApp</p><p class="text-sm text-gray-200 group-hover:text-azure-light transition-colors">+977 9840247855</p></div>
+        </a>
+        <div class="card flex items-center gap-4 p-4">
+          <div class="w-9 h-9 rounded-xl bg-azure/15 flex items-center justify-center text-base">📍</div>
+          <div><p class="text-xs text-gray-500">Location</p><p class="text-sm text-gray-200">Kathmandu, Nepal</p></div>
+        </div>
+      </div>
+      <div class="reveal card p-6">
+        <h3 class="font-display font-semibold text-white text-sm mb-4">Send a Message</h3>
+        <div class="space-y-3">
+          <input type="text" placeholder="Your Name" class="w-full bg-navy-800/60 border border-blue-900/50 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors"/>
+          <input type="email" placeholder="Your Email" class="w-full bg-navy-800/60 border border-blue-900/50 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors"/>
+          <textarea rows="4" placeholder="Your Message" class="w-full bg-navy-800/60 border border-blue-900/50 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-azure transition-colors resize-none"></textarea>
+          <a href="mailto:aagaman.adhikari2020@gmail.com" class="block w-full text-center py-2.5 bg-azure text-white text-sm font-medium rounded-full hover:bg-azure-light transition-colors">Send Message →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-blue-900/30 py-5 text-center relative z-10">
+  <p class="font-display text-sm text-gray-500">Aagaman Adhikari<span class="text-azure">.</span> · BCA Student · Kathmandu, Nepal</p>
+</footer>
+
+</div><!-- end #main-site -->
+
+<!-- ══ CV PRINT LAYOUT (shown only when printing) ══ -->
+<div id="cv-print-layout" class="cv-body" style="font-family:'DM Sans',Arial,sans-serif; max-width:100%; padding:0;">
+
+  <!-- Header -->
+  <table width="100%" style="margin-bottom:14px;border-bottom:3px solid #2563eb;padding-bottom:10px;">
+    <tr>
+      <td style="width:72px;vertical-align:middle;">
+        <!-- photo placeholder in print -->
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#60a5fa);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;">AA</div>
+      </td>
+      <td style="padding-left:14px;vertical-align:middle;">
+        <div style="font-size:22pt;font-weight:800;color:#111;font-family:'Syne',sans-serif;line-height:1.1;">AAGAMAN ADHIKARI</div>
+        <div style="font-size:10pt;color:#2563eb;margin-top:2px;">BCA Student · Web Developer · UI/UX Designer</div>
+        <div style="font-size:8.5pt;color:#555;margin-top:4px;">
+          📧 aagaman.adhikari2020@gmail.com &nbsp;|&nbsp; 📱 +977 9840247855 &nbsp;|&nbsp; 🔗 linkedin.com/in/aagaman-adhikari &nbsp;|&nbsp; 📍 Kathmandu, Nepal
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Two-column layout -->
+  <table width="100%" style="vertical-align:top;">
+  <tr>
+    <!-- LEFT column -->
+    <td style="width:62%;vertical-align:top;padding-right:16px;">
+
+      <!-- About -->
+      <div class="cv-section-title">ABOUT ME</div>
+      <p style="font-size:9pt;color:#333;margin-bottom:12px;line-height:1.55;">
+        BCA student at Ratna Rajya Laxmi Campus, Kathmandu, passionate about web development, UI/UX design, computer networking, and graphic design. I combine technical knowledge with practical experience to build functional and visually clean digital solutions.
+      </p>
+
+      <!-- Experience -->
+      <div class="cv-section-title">EXPERIENCE</div>
+
+      <div style="margin-bottom:9px;">
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">Office Administration Intern</div>
+        <div style="color:#2563eb;font-size:8.5pt;">Delta AutoCorp Pvt. Ltd · Kathmandu &nbsp;<span style="color:#888;">[Sep 2023 – Nov 2023]</span></div>
+        <ul style="margin:4px 0 0 14px;padding:0;font-size:8.5pt;color:#333;">
+          <li>Managed digital records and documents using Microsoft Office Suite</li>
+          <li>Supported data entry, report generation, and digital file organization</li>
+          <li>Collaborated across departments on process improvement projects</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom:9px;">
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">Banking Intern</div>
+        <div style="color:#2563eb;font-size:8.5pt;">Himalayan Bank Ltd. · Tandi, Chitwan &nbsp;<span style="color:#888;">[Aug 2022 – Jan 2023]</span></div>
+        <ul style="margin:4px 0 0 14px;padding:0;font-size:8.5pt;color:#333;">
+          <li>Handled digital onboarding: uploaded customer photos/signatures to banking system</li>
+          <li>Enrolled customers in e-banking and SMS banking platforms</li>
+          <li>Maintained accurate digital records and database entries</li>
+        </ul>
+      </div>
+
+      <!-- Projects -->
+      <div class="cv-section-title">PROJECTS</div>
+      <div style="margin-bottom:7px;">
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">🌐 Portfolio Website</div>
+        <div style="font-size:8.5pt;color:#333;">Personal CV & portfolio built with HTML, CSS and Tailwind CSS. Fully responsive.</div>
+        <div style="font-size:8pt;color:#2563eb;">HTML · CSS · Tailwind CSS</div>
+      </div>
+      <div style="margin-bottom:7px;">
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">🖥️ Hardware & Networking Lab</div>
+        <div style="font-size:8.5pt;color:#333;">PC assembly, OS installation, LAN/WAN setup and network diagnostics training project.</div>
+        <div style="font-size:8pt;color:#2563eb;">Networking · Hardware · Troubleshooting</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">🎨 UI/UX Design Work</div>
+        <div style="font-size:8.5pt;color:#333;">Graphic design and layout projects using Adobe Suite and Canva.</div>
+        <div style="font-size:8pt;color:#2563eb;">Photoshop · Illustrator · Canva</div>
+      </div>
+
+      <!-- Education -->
+      <div class="cv-section-title">EDUCATION</div>
+      <div style="margin-bottom:7px;">
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">Bachelor of Computer Application (BCA)</div>
+        <div style="color:#2563eb;font-size:8.5pt;">Ratna Rajya Laxmi Campus, Tribhuvan University · Kathmandu</div>
+        <div style="color:#888;font-size:8pt;">2023 – Present</div>
+      </div>
+      <div>
+        <div style="font-weight:700;color:#111;font-size:9.5pt;">High School (+2) — Management & Computer Science</div>
+        <div style="color:#2563eb;font-size:8.5pt;">Skyrider Higher Secondary Boarding School · Tandi, Chitwan</div>
+        <div style="color:#888;font-size:8pt;">2019 – 2021</div>
+      </div>
+
+    </td>
+
+    <!-- RIGHT column -->
+    <td style="width:38%;vertical-align:top;padding-left:14px;border-left:1px solid #dbeafe;">
+
+      <!-- Technical Skills -->
+      <div class="cv-section-title">TECHNICAL SKILLS</div>
+      <div style="margin-bottom:10px;font-size:8.5pt;color:#333;">
+        <div style="margin-bottom:5px;">
+          <div style="display:flex;justify-content:space-between;"><span>HTML & CSS</span><span style="color:#2563eb;">85%</span></div>
+          <div style="height:5px;background:#dbeafe;border-radius:4px;"><div style="height:100%;width:85%;background:#2563eb;border-radius:4px;"></div></div>
+        </div>
+        <div style="margin-bottom:5px;">
+          <div style="display:flex;justify-content:space-between;"><span>Microsoft Office Suite</span><span style="color:#2563eb;">90%</span></div>
+          <div style="height:5px;background:#dbeafe;border-radius:4px;"><div style="height:100%;width:90%;background:#2563eb;border-radius:4px;"></div></div>
+        </div>
+        <div style="margin-bottom:5px;">
+          <div style="display:flex;justify-content:space-between;"><span>Graphic Design (Adobe Suite)</span><span style="color:#2563eb;">70%</span></div>
+          <div style="height:5px;background:#dbeafe;border-radius:4px;"><div style="height:100%;width:70%;background:#2563eb;border-radius:4px;"></div></div>
+        </div>
+        <div style="margin-bottom:5px;">
+          <div style="display:flex;justify-content:space-between;"><span>Computer Hardware & Networking</span><span style="color:#2563eb;">80%</span></div>
+          <div style="height:5px;background:#dbeafe;border-radius:4px;"><div style="height:100%;width:80%;background:#2563eb;border-radius:4px;"></div></div>
+        </div>
+        <div style="margin-bottom:5px;">
+          <div style="display:flex;justify-content:space-between;"><span>Java Programming</span><span style="color:#2563eb;">55%</span></div>
+          <div style="height:5px;background:#dbeafe;border-radius:4px;"><div style="height:100%;width:55%;background:#2563eb;border-radius:4px;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;"><span>UI/UX Design</span><span style="color:#2563eb;">75%</span></div>
+          <div style="height:5px;background:#dbeafe;border-radius:4px;"><div style="height:100%;width:75%;background:#2563eb;border-radius:4px;"></div></div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="cv-section-title">TOOLS & TECHNOLOGIES</div>
+      <div style="font-size:8.5pt;color:#333;margin-bottom:10px;line-height:1.9;">
+        HTML5 · CSS3 · Tailwind CSS · PHP/Laravel · Java · MySQL · Git · Adobe Photoshop · Adobe Illustrator · Canva · Figma · VS Code · Microsoft Office
+      </div>
+
+      <!-- Training -->
+      <div class="cv-section-title">TRAINING</div>
+      <div style="margin-bottom:5px;font-size:8.5pt;">
+        <div style="font-weight:600;color:#111;">Hardware, Networking & Troubleshooting</div>
+        <div style="color:#2563eb;">Ratna Rajya Laxmi Campus · Mar 2024</div>
+      </div>
+      <div style="margin-bottom:10px;font-size:8.5pt;">
+        <div style="font-weight:600;color:#111;">UI/UX & Graphic Design (Self-directed)</div>
+        <div style="color:#2563eb;">Adobe Suite, Figma · Ongoing</div>
+      </div>
+
+      <!-- Languages -->
+      <div class="cv-section-title">LANGUAGES</div>
+      <div style="font-size:8.5pt;color:#333;margin-bottom:10px;">
+        <div><strong>Nepali</strong> — Native</div>
+        <div><strong>English</strong> — B2 (CEFR) · Reading C1</div>
+      </div>
+
+      <!-- Soft Skills -->
+      <div class="cv-section-title">SOFT SKILLS</div>
+      <div style="font-size:8.5pt;color:#333;margin-bottom:10px;line-height:1.8;">
+        Problem Solving · Team Collaboration · Attention to Detail · Communication · Adaptability · Time Management
+      </div>
+
+      <!-- Interests -->
+      <div class="cv-section-title">INTERESTS</div>
+      <div style="font-size:8.5pt;color:#333;">
+        💻 Technology & Innovation<br/>🎨 Drawing & Visual Design<br/>🌿 Nature
+      </div>
+
+    </td>
+  </tr>
+  </table>
+</div>
+
+<!-- ══ JS ══ -->
+<script>
+  // Skill bars data
+  const techSkills = [
+    {name:'HTML & CSS', pct:85, icon:'🌐'},
+    {name:'Microsoft Office Suite', pct:90, icon:'📊'},
+    {name:'Graphic Design (Photoshop / Illustrator)', pct:70, icon:'🎨'},
+    {name:'Computer Hardware & Networking', pct:80, icon:'🖥️'},
+    {name:'UI/UX Design (Figma/Canva)', pct:75, icon:'🖌️'},
+    {name:'PHP / Laravel', pct:70, icon:'⚙️'},
+    {name:'Java (OOP Basics)', pct:55, icon:'☕'},
+  ];
+  const techTools = ['HTML5','CSS3','Tailwind','PHP','Laravel','Java','MySQL','Git','Figma','Photoshop','Illustrator','Canva','VS Code'];
+  const softSkills = ['Problem Solving','Teamwork','Attention to Detail','Communication','Adaptability','Time Management'];
+
+  const barsEl = document.getElementById('skillBars');
+  techSkills.forEach(s => {
+    barsEl.insertAdjacentHTML('beforeend',`
+      <div>
+        <div class="flex justify-between items-center mb-1.5">
+          <span class="text-gray-300 text-sm flex items-center gap-2"><span>${s.icon}</span>${s.name}</span>
+          <span class="text-azure-light text-xs font-medium">${s.pct}%</span>
+        </div>
+        <div class="bar"><div class="bar-fill" data-w="${s.pct}"></div></div>
+      </div>`);
+  });
+
+  const techEl = document.getElementById('techTags');
+  techTools.forEach(t => techEl.insertAdjacentHTML('beforeend',`<span class="pill">${t}</span>`));
+
+  const softEl = document.getElementById('softTags');
+  softSkills.forEach(s => softEl.insertAdjacentHTML('beforeend',`<span class="pill">${s}</span>`));
+
+  // Intersection observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('on');
+        e.target.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.w+'%');
+        obs.unobserve(e.target);
+      }
     });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    const softContainer = document.getElementById('softTags');
-    softSkills.forEach(s => {
-      softContainer.insertAdjacentHTML('beforeend',
-        `<span class="px-3 py-1 text-sm rounded-full bg-blue-900/40 border border-blue-800/60 text-gray-300">${s}</span>`);
-    });
+  // Also trigger bars already visible
+  document.querySelectorAll('.bar-fill').forEach(b => {
+    const p = b.closest('.reveal');
+    if(!p) b.style.width = b.dataset.w+'%';
+  });
 
-    /* Intersection Observer: reveal + bars */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          /* Animate bar fills if inside this section */
-          e.target.querySelectorAll('.bar-fill').forEach(bar => {
-            bar.style.width = bar.dataset.w + '%';
-          });
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
+  // Mobile menu
+  document.getElementById('menuBtn').addEventListener('click',() => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+  document.querySelectorAll('#mobileMenu a').forEach(a =>
+    a.addEventListener('click',() => document.getElementById('mobileMenu').classList.add('hidden'))
+  );
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    /* Also trigger bars that are already in reveal elements that get made visible */
-    document.querySelectorAll('.bar-fill').forEach(bar => {
-      const parent = bar.closest('.reveal');
-      if (!parent) bar.style.width = bar.dataset.w + '%';
-    });
-
-    /* Mobile menu */
-    document.getElementById('menuBtn').addEventListener('click', () => {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    });
-    document.querySelectorAll('#mobileMenu a').forEach(a =>
-      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+  // Nav active
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll',() => {
+    let cur='';
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop-90) cur=s.id; });
+    document.querySelectorAll('.nav-link').forEach(a =>
+      a.classList.toggle('active', a.getAttribute('href')==='#'+cur)
     );
+  },{passive:true});
 
-    /* Photo upload */
-    document.getElementById('photoUpload').addEventListener('change', function() {
-      const file = this.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        const img = document.getElementById('cvPhoto');
-        img.src = ev.target.result;
-        img.classList.remove('hidden');
-        document.getElementById('initials').classList.add('hidden');
-      };
-      reader.readAsDataURL(file);
-    });
-
-    /* Nav active highlight on scroll */
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-      let cur = '';
-      sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 80) cur = sec.id;
-      });
-      document.querySelectorAll('.nav-link').forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
-      });
-    }, { passive: true });
-  </script>
+  // Print / Download CV
+  function printCV(){
+    window.print();
+  }
+</script>
 </body>
 </html>
